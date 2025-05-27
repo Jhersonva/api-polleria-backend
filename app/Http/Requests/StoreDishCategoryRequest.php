@@ -11,7 +11,7 @@ class StoreDishCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; 
+        return true;
     }
 
     /**
@@ -24,6 +24,7 @@ class StoreDishCategoryRequest extends FormRequest
         return [
             'name'   => 'required|string|max:100',
             'status' => 'required|in:active,inactive',
+            'image'  => 'nullable|string',
         ];
     }
 }
