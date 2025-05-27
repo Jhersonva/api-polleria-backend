@@ -24,6 +24,7 @@ class UpdateDishCategoryRequest extends FormRequest
         return [
             'name'   => 'sometimes|string|max:100',
             'status' => 'sometimes|in:active, inactive',
+            'image'  => 'sometimes|string',
         ];
     }
 }
