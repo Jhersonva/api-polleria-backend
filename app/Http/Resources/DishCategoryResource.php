@@ -17,10 +17,10 @@ class DishCategoryResource extends JsonResource
         return [
             'id'     => $this->id,
             'name'   => $this->name,
-            //'status' => $this->status,
-            'image'  => $this->whenLoaded('image', function () {
+            'status' => $this->status,
+            'image'  => $this->whenLoaded('image', function ($image) {
                 return [
-                    'url' => $this->image->url,
+                    'url' => $image->url ? asset('storage/' . $image->url) : null,
                 ];
             }),
         ];
