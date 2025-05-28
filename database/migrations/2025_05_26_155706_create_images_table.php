@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dish_categories', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->morphs('imageable');
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dish_categories');
+        Schema::dropIfExists('images');
     }
 };
