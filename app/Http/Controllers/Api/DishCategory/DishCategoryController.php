@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\DishCategory;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreDishCategoryRequest;
-use App\Http\Requests\UpdateDishCategoryRequest;
+use App\Http\Requests\DishCategory\StoreDishCategoryRequest;
+use App\Http\Requests\DishCategory\UpdateDishCategoryRequest;
 use App\Http\Resources\DishCategoryResource;
 use App\Services\DishCategoryServices;
 

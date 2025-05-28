@@ -10,9 +10,7 @@ Route::get(('appetizers/{id}'), [AppetizerController::class, 'show']);
 Route::put(('appetizers/{id}'), [AppetizerController::class, 'update']);
 Route::delete(('appetizers/{id}'), [AppetizerController::class, 'destroy']);
 
-
-
-
+// API Routes for DishCategory resource
 Route::get('dish-categories', [DishCategoryController::class, 'index']);
 Route::post('dish-categories', [DishCategoryController::class, 'store']);
 Route::get('dish-categories/{id}', [DishCategoryController::class, 'show']);
