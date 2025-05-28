@@ -8,15 +8,9 @@ use Illuminate\Support\Facades\Storage;
 
 trait DeleteImage
 {
-    public function deleteImage(?string $path): bool
+    public function delete(string $path): bool
     {
-        if (empty($path)) {
-            return false;
-        }
-        $relativePath = str_replace(asset('storage/') . '/', '', $path);
-        if (Storage::disk('public')->exists($relativePath)) {
-            return Storage::disk('public')->delete($relativePath);
-        }
-        return false;
+        // Asegúrate de que la imagen esté en el disco 'public'
+        return Storage::disk('public')->delete($path);
     }
 }
