@@ -18,7 +18,6 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->foreignId('dish_category_id')->constrained('dish_categories')->onDelete('cascade');
             $table->enum('status', ['active', 'inactive'])->default('active');
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
