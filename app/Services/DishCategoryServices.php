@@ -29,16 +29,16 @@ class DishCategoryServices
     public function createDishCategory($data)
     {
         $dishCategory = $this->dishCategoryRepository->create($data);
-
-        if (isset($data['image']) && !empty($data['image'])) {
-            $image = $this->saveImageBase64($data['image'], 'dish_categories');
-
-            if ($image) { // Asegurar que no sea null
-                $dishCategory->image()->create(['url' => $image]);
-                $dishCategory->load('image'); // Recargar la relación para que no devuelva null
-            }
+        if (isset($data['image']) && !empty($data['image'])){
+            $imagePath = $this->upload($data['image'], 'dish_categories');
+            $dishCategory->image()->create(['url' => $imagePath]);
+            $dishCategory->load('image');
         }
-
+        else {
+            $imagePath = 'default/categorias.jpg';
+            $dishCategory->image()->create(['url' => $imagePath]);
+            $dishCategory->load('image');
+        }
         return $dishCategory;
     }
 
@@ -46,19 +46,22 @@ class DishCategoryServices
     {
         $dishCategory = $this->dishCategoryRepository->update($data, $id);
 
+        // Validamos si llegó imagen nueva
         if (isset($data['image']) && !empty($data['image'])) {
+            // 1. Eliminamos imagen previa (si existe)
             $existingImage = $dishCategory->image()->latest()->first();
-            $image = $this->saveImageBase64($data['image'], 'dish_categories');
             if ($existingImage) {
-                $this->deleteImage($existingImage->url);
+                $this->delete($existingImage->url); // borrar archivo del disco
+                $existingImage->delete();           // borrar registro en DB
             }
-            if ($dishCategory->image) {
-                $dishCategory->image()->update(['url' => $image]);
-            } else {
-                $dishCategory->image()->create(['url' => $image]);
-            }
-            $dishCategory->load('image');
+
+            // 2. Subimos nueva imagen y la asociamos
+            $newImagePath = $this->upload($data['image'], 'dish_categories');
+            $dishCategory->image()->create(['url' => $newImagePath]);
         }
+
+        // 3. Cargamos la relación para devolver en la respuesta
+        $dishCategory->load('image');
 
         return $dishCategory;
     }
@@ -67,7 +70,7 @@ class DishCategoryServices
     {
         $dishCategory = $this->dishCategoryRepository->find($id);
         if ($dishCategory->image) {
-            $this->deleteImage($dishCategory->image->url);
+            $this->delete($dishCategory->image->url);
             $dishCategory->image->delete();
         }
         return $this->dishCategoryRepository->delete($id);

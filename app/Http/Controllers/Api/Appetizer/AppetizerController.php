@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api\Appetizer;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreAppetizerRequest;
-use App\Http\Requests\UpdateAppetizerRequest;
+use App\Http\Requests\Appetizer\StoreAppetizerRequest;
+use App\Http\Requests\Appetizer\UpdateAppetizerRequest;
 use App\Http\Resources\AppetizerResource;
 use App\Services\AppetizerService;
 
