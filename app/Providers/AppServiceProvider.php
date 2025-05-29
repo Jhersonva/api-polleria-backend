@@ -4,11 +4,13 @@ namespace App\Providers;
 
 use App\Models\DishCategory;
 use App\Repositories\Interfaces\AppetizerRepositoryInterface;
-use App\Repositories\Interfaces\DrinkRepositoryInterface;
+use App\Repositories\Interfaces\DishRepositoryInterface;
 use App\Repositories\AppetizerRepository;
 use App\Repositories\DishCategoryRepository;
+use App\Repositories\DishRepository;
 use App\Repositories\Interfaces\DishCategoryRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use PhpParser\Node\Scalar\MagicConst\Dir;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(DishCategoryRepositoryInterface::class, DishCategoryRepository::class);
         $this->app->bind(AppetizerRepositoryInterface::class, AppetizerRepository::class);
+        $this->app->bind(DishRepositoryInterface::class, DishRepository::class);
     }
 
     /**

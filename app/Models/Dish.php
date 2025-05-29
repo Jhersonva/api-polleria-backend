@@ -13,4 +13,8 @@ class Dish extends Model
     {
         return $this->belongsTo(DishCategory::class, 'dish_category_id');
     }
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }
