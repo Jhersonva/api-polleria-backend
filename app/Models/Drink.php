@@ -4,11 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Appetizer extends Model
+class Drink extends Model
 {
-    protected $table = 'appetizers';
-
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'price'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
