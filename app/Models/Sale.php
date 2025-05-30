@@ -38,4 +38,8 @@ class Sale extends Model
         return $this->hasMany(SalePayment::class);
     }
 
+     public function getRemainingAmountAttribute()
+    {
+        return $this->total_amount - $this->paid_amount;
+    }
 }
