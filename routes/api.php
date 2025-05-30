@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Api\DishCategory\DishCategoryController;
 use App\Http\Controllers\Api\Appetizer\AppetizerController;
+use App\Http\Controllers\Api\Dish\DishController;
 use Illuminate\Support\Facades\Route;
 
 // API Routes for Appetizer resource
@@ -16,3 +17,10 @@ Route::post('dish-categories', [DishCategoryController::class, 'store']);
 Route::get('dish-categories/{id}', [DishCategoryController::class, 'show']);
 Route::put('dish-categories/{id}', [DishCategoryController::class, 'update']);
 Route::delete('dish-categories/{id}', [DishCategoryController::class, 'destroy']);
+
+// API Routes for Dish resource
+Route::get('dish', [DishController::class, 'index']);
+Route::post('dish', [DishController::class, 'store']);
+Route::get('dish/{id}', [DishController::class, 'show']);
+Route::put('dish/{id}', [DishController::class, 'update']);
+Route::delete('dish/{id}', [DishController::class, 'destroy']);
