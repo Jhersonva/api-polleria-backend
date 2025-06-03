@@ -51,8 +51,11 @@ class DishCategoryServices
             // 1. Eliminamos imagen previa (si existe)
             $existingImage = $dishCategory->image()->latest()->first();
             if ($existingImage) {
-                $this->delete($existingImage->url); // borrar archivo del disco
-                $existingImage->delete();           // borrar registro en DB
+                // Verificar que la imagen no esté en la carpeta default
+                if (!str_starts_with($existingImage->url, 'default/')) {
+                    $this->delete($existingImage->url); // borrar archivo del disco
+                }
+                $existingImage->delete(); // borrar registro en DB siempre
             }
 
             // 2. Subimos nueva imagen y la asociamos
@@ -70,7 +73,9 @@ class DishCategoryServices
     {
         $dishCategory = $this->dishCategoryRepository->find($id);
         if ($dishCategory->image) {
-            $this->delete($dishCategory->image->url);
+            if (!str_starts_with($dishCategory->image->url, 'default/')) {
+                $this->delete($dishCategory->image->url);
+            }
             $dishCategory->image->delete();
         }
         return $this->dishCategoryRepository->delete($id);

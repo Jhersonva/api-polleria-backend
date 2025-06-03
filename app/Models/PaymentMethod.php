@@ -4,16 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Appetizer extends Model
+class PaymentMethod extends Model
 {
-    protected $table = 'appetizers';
-
     protected $fillable = ['name'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
-    public function saleDetails()
+    public function salePayments()
     {
-        return $this->hasMany(SaleDetail::class);
+        return $this->hasMany(SalePayment::class);
     }
 }

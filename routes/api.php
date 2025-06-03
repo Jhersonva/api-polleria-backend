@@ -2,6 +2,7 @@
 use App\Http\Controllers\Api\DishCategory\DishCategoryController;
 use App\Http\Controllers\Api\Appetizer\AppetizerController;
 use App\Http\Controllers\Api\Dish\DishController;
+use App\Http\Controllers\Api\Drink\DrinkController;
 use Illuminate\Support\Facades\Route;
 
 // API Routes for Appetizer resource
@@ -24,3 +25,10 @@ Route::post('dish', [DishController::class, 'store']);
 Route::get('dish/{id}', [DishController::class, 'show']);
 Route::put('dish/{id}', [DishController::class, 'update']);
 Route::delete('dish/{id}', [DishController::class, 'destroy']);
+
+// API Routes for Drink resource
+Route::get('drinks', [DrinkController::class, 'index']);
+Route::post('drinks', [DrinkController::class, 'store']);
+Route::get('drinks/{id}', [DrinkController::class, 'show']);
+Route::put('drinks/{id}', [DrinkController::class, 'update']);
+Route::delete('drinks/{id}', [DrinkController::class, 'destroy']);
