@@ -3,6 +3,7 @@ use App\Http\Controllers\Api\DishCategory\DishCategoryController;
 use App\Http\Controllers\Api\Appetizer\AppetizerController;
 use App\Http\Controllers\Api\Dish\DishController;
 use App\Http\Controllers\Api\Drink\DrinkController;
+use App\Http\Controllers\Api\PaymentMethod\PaymentMethodController;
 use Illuminate\Support\Facades\Route;
 
 // API Routes for Appetizer resource
@@ -32,3 +33,11 @@ Route::post('drinks', [DrinkController::class, 'store']);
 Route::get('drinks/{id}', [DrinkController::class, 'show']);
 Route::put('drinks/{id}', [DrinkController::class, 'update']);
 Route::delete('drinks/{id}', [DrinkController::class, 'destroy']);
+
+
+// API Routes for PaymentMethod resource
+Route::get('paymentMethods', [PaymentMethodController::class, 'index']);
+Route::post('paymentMethods', [PaymentMethodController::class, 'store']);
+Route::get('paymentMethods/{id}', [PaymentMethodController::class, 'show']);
+Route::put('paymentMethods/{id}', [PaymentMethodController::class, 'update']);
+Route::delete('paymentMethods/{id}', [PaymentMethodController::class, 'destroy']);
