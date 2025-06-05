@@ -4,7 +4,29 @@ use App\Http\Controllers\Api\Appetizer\AppetizerController;
 use App\Http\Controllers\Api\Dish\DishController;
 use App\Http\Controllers\Api\Drink\DrinkController;
 use App\Http\Controllers\Api\PaymentMethod\PaymentMethodController;
+use App\Http\Controllers\Api\AuthUsers\AuthUserController;
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsUserAuth;
+use App\Http\Middleware\NoUserExists;
 use Illuminate\Support\Facades\Route;
+
+// Rutas de la API AuthUser
+Route::post('register', [AuthUserController::class, 'registerUser'])->middleware(NoUserExists::class);
+Route::post('login', [AuthUserController::class, 'loginUser']);
+
+Route::middleware(IsUserAuth::class)->group(function () {
+
+    // Rutas de la API AuthUser Authenticated
+    Route::controller(AuthUserController::class)->group(function () {
+        Route::post('refresh-token', 'refreshToken');
+        Route::post('logout', 'logout');
+        Route::get('user', 'getUser');
+    });
+
+    // Rutas de la API AuthUser -  Authenticated - Admin
+    Route::middleware(IsAdmin::class)->group(function () {
+    });
+});
 
 // API Routes for Appetizer resource
 Route::get(('appetizers'), [AppetizerController::class, 'index']);
