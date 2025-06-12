@@ -21,15 +21,27 @@ class Sale extends Model
         return $this->hasMany(SaleDetail::class);
     }
 
-    public function getTotalAmountAttribute()
+    public function getTotalAmountAttribute($value)
     {
+        // Si ya tiene un valor guardado, usarlo
+        if ($value !== null) {
+            return (float) $value;
+        }
+
+        // Si no, calcularlo desde los detalles
         return $this->saleDetails->sum(function ($detail) {
             return $detail->quantity * $detail->unit_price;
         });
     }
 
-    public function getPaidAmountAttribute()
+    public function getPaidAmountAttribute($value)
     {
+        // Si ya tiene un valor guardado, usarlo
+        if ($value !== null) {
+            return (float) $value;
+        }
+
+        // Si no, calcularlo desde los pagos
         return $this->salePayments->sum('amount');
     }
 
@@ -42,4 +54,5 @@ class Sale extends Model
     {
         return $this->total_amount - $this->paid_amount;
     }
+
 }
