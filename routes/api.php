@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Appetizer\AppetizerController;
 use App\Http\Controllers\Api\Dish\DishController;
 use App\Http\Controllers\Api\Drink\DrinkController;
 use App\Http\Controllers\Api\PaymentMethod\PaymentMethodController;
+use App\Http\Controllers\Api\Sale\SaleController;
 use App\Http\Controllers\Api\AuthUsers\AuthUserController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUserAuth;
@@ -63,3 +64,10 @@ Route::post('paymentMethods', [PaymentMethodController::class, 'store']);
 Route::get('paymentMethods/{id}', [PaymentMethodController::class, 'show']);
 Route::put('paymentMethods/{id}', [PaymentMethodController::class, 'update']);
 Route::delete('paymentMethods/{id}', [PaymentMethodController::class, 'destroy']);
+
+// API Routes for Sales resource
+Route::get('sales', [SaleController::class, 'index']);
+Route::post('sales', [SaleController::class, 'store']);
+Route::get('sales/{id}', [SaleController::class, 'show']);
+Route::delete('sales/{id}', [SaleController::class, 'destroy']);
+Route::put('sales/{id}', [SaleController::class, 'update']);
